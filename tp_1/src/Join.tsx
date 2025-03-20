@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./Join.css"; // Importar los estilos
+import "./Join.css";
+import FormInput from "./FormInput"
 
 export default function Join() {
   const [formData, setFormData] = useState({
@@ -21,52 +22,25 @@ export default function Join() {
       alert("Las contraseñas no coinciden");
       return;
     }
-    // Mostrar los datos en un alert
-    alert(
-        `Datos ingresados:\nNombre: ${formData.nombre}\nApellido: ${formData.apellido}\nEmail: ${formData.email}\nTeléfono: ${formData.telefono}`
-      );
+    alert(`Datos ingresados:\nNombre: ${formData.nombre}\nApellido: ${formData.apellido}\nEmail: ${formData.email}\nTeléfono: ${formData.telefono}`);
     console.log("Datos enviados:", formData);
   };
 
   return (
     <div className="container">
-  <div className="form-box">
-    <h2>Registro de usuario nuevo</h2>
-    <h5>Ingrese sus datos para iniciar el proceso de alta</h5>
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" onChange={handleChange} required />
+      <div className="form-box">
+        <h2>Registro de usuario nuevo</h2>
+        <h5>Ingrese sus datos para iniciar el proceso de alta</h5>
+        <form onSubmit={handleSubmit}>
+          <FormInput label="Nombre" type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
+          <FormInput label="Apellido" type="text" name="apellido" placeholder="Apellido" value={formData.apellido} onChange={handleChange} />
+          <FormInput label="Email" type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+          <FormInput label="Teléfono" type="tel" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} />
+          <FormInput label="Password" type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+          <FormInput label="Confirmar Password" type="password" name="confirmarPassword" placeholder="Confirmar Password" value={formData.confirmarPassword} onChange={handleChange} />
+          <button type="submit">Registrarse</button>
+        </form>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" placeholder="Apellido" onChange={handleChange} required />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Email" onChange={handleChange} required />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" onChange={handleChange} required />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Password" onChange={handleChange} required />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="confirmarPassword">Confirmar Password:</label>
-        <input type="password" id="confirmarPassword" name="confirmarPassword" placeholder="Confirmar Password" onChange={handleChange} required />
-      </div>
-
-      <button type="submit">Registrarse</button>
-    </form>
-  </div>
-</div>
+    </div>
   );
 }
